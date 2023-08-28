@@ -2,6 +2,25 @@ export function removePrefix(prefix, str) {
   return str.replace(prefix, '');
 }
 
+const symbolMappings = {
+  'TAB': '⇥',
+  'VOLD': '🔉',
+  'VOLU': '🔊',
+  'RSFT': '⇧',
+  'LSFT': '⇧',
+  'ENT': '↲',
+  'BSPC': '⌫',
+  'RGUI': '⌘',
+  'LGUI': '⌘'
+  
+}
+
+function symbol(code) {
+  if(symbolMappings[code]) {
+    return symbolMappings[code];
+  } else return code;
+}
+
 export function displayKey(label) {
   let temp = '';
 
@@ -31,6 +50,7 @@ export function displayKey(label) {
       return { tap: '=', shift: '+' };
     }
 
+
     if (temp == 'LBRC') {
       return { tap: '[', shift: '{' };
     }
@@ -38,7 +58,7 @@ export function displayKey(label) {
     if (temp == 'RBRC') {
       return { tap: ']', shift: '}' };
     }
-   
+
     if (temp == 'GRV') {
       return { tap: '`', shift: '~' };
     }
@@ -68,7 +88,7 @@ export function displayKey(label) {
     if (temp == 'DOWN') {
       return { tap: '↓' };
     }
-    return { tap: temp };
+    return { tap: symbol(temp) };
   }
 
   if (label.startsWith('S(')) {
@@ -100,15 +120,16 @@ export function displayKey(label) {
   }
 
   if (label.startsWith('MT(')) {
-    const regex = /MT\((\w+),(\w+)\)/gm;
+    const regex = /MT\(([a-zA-Z_| ]*),(\w+)\)/gm;
     let m;
     while ((m = regex.exec(label)) !== null) {
       if (m.index === regex.lastIndex) {
         regex.lastIndex++;
       }
       console.log(m);
-      let top = removePrefix('KC_', m[2]);
-      let bottom = removePrefix('MOD_', m[1]);
+      let top = symbol(removePrefix('KC_', m[2]));
+      let str = m[1].includes('|') ? m[1].split('|')[0] : m[1];
+      let bottom = removePrefix('MOD_', str);
       return { tap: top, hold: bottom };
     }
   }
@@ -120,12 +141,11 @@ export function displayKey(label) {
       if (m.index === regex.lastIndex) {
         regex.lastIndex++;
       }
-      console.log(m);
-      let top = removePrefix('KC_', m[2]);
+      let top = symbol(removePrefix('KC_', m[2]));
       return { tap: top, hold: `L${m[1]}` };
     }
   }
 
-  return { tap: label };
+  return { tap: symbol(label) };
 
 }
