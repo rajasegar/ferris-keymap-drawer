@@ -4,6 +4,7 @@ import json from '../ferris_sweep.layout.json';
 import { displayKey } from './utils.js';
 import  KeyCap from './KeyCap';
 import KeyCapFlat from './KeyCapFlat';
+import TopRow from './TopRow.jsx';
 
 function App() {
 
@@ -15,10 +16,10 @@ function App() {
 const Cols = (cols) => {
       return cols.map(c => {
         return (
-          <td>
+          <div className="column">
             { selectedKeyCap === '3D' && <KeyCap keymap={displayKey(c)} tooltip={c} /> }
             { selectedKeyCap === 'Flat' && <KeyCapFlat keymap={displayKey(c)} tooltip={c} /> }
-          </td>
+          </div>
         )
       })
     }
@@ -26,28 +27,26 @@ const Cols = (cols) => {
     const Rows = (rows) => {
       return rows.map(r => {
        return (
-          <tr>{Cols(r)}</tr>
+         <div className="row" >
+          {Cols(r)}
+         </div>
         )
       })
     }
 
   const LeftSplit = (props) => {
     return (
-      <>
-        <table>
+      <div style={{width: "50%", paddingTop: '20px'}}>
           {Rows(props.rows)}
-        </table>
-      </>
+      </div>
     )
   }
 
 const RightSplit = (props) => {
     return (
-      <>
-        <table>
+      <div style={{width: "50%"}}>
           {Rows(props.rows)}
-        </table>
-      </>
+      </div>
     )
   }
 
@@ -58,14 +57,14 @@ const RightSplit = (props) => {
       [layer[0],layer[1],layer[2], layer[3],layer[4]],
       [layer[5],layer[6],layer[7], layer[8],layer[9]],
       [layer[10],layer[11],layer[12], layer[13],layer[14]],
-      [' ', ' ', ' ',layer[15],layer[16]],
+      [,,,layer[15],layer[16]],
     ];
 
     const rightrows = [
       [layer[20],layer[21],layer[22], layer[23],layer[24]],
       [layer[25],layer[26],layer[27], layer[28],layer[29]],
       [layer[30],layer[31],layer[32], layer[33],layer[34]],
-      [layer[35],layer[36],' ',' ',' '],
+      [layer[35],layer[36]],
     ];
     
     return (
@@ -82,8 +81,10 @@ const RightSplit = (props) => {
   return (
     <>
       <div>
+    
         <h1>Ferris Sweep keymap drawer</h1>
-        <select value={selectedKeyCap} onChange={(e) => setSelectedKeyCap(e.target.value)}>
+        <label htmlFor="lstKeycaps">Keycaps: </label>
+        <select id="lstKeycaps" value={selectedKeyCap} onChange={(e) => setSelectedKeyCap(e.target.value)}>
           <option value="Flat">Flat</option>
           <option value="3D">3D</option>
         </select>

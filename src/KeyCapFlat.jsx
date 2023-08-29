@@ -6,7 +6,7 @@ const KeyCapFlat = (props) => {
     
     
     return (
-      <svg width="50" height="50">
+      <svg width="50" height="50" style={{paddingTop: props.offsety}}>
         <rect x="0" y="0" width="50" height="50" stroke="black" opacity="0.3" stroke-width="1px"
               fill={fill} rx="5" ry="5"/>
         { keymap.shift &&

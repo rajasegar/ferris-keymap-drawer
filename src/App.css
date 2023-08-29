@@ -17,6 +17,30 @@ td {
 
 .flex {
   display: flex;
-  justify-content:  space-between;
 }
 
+.row {
+  display: flex;
+}
+
+.column {
+  position: relative;
+  margin: 5px;
+}
+
+.column:first-child {
+  top: 50px;
+}
+
+.column:nth-child(2) {
+  top: 30px;
+}
+
+.column:nth-child(4)
+{
+  top: 30px;
+}
+
+.column:last-child {
+  top: 40px;
+}
