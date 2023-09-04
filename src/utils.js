@@ -90,7 +90,8 @@ export function displayKey(label) {
     }
     return { tap: symbol(temp) };
   }
-
+  
+  // shift key combinations
   if (label.startsWith('S(')) {
     const numberSymbols = {
       'KC_1': '!',
@@ -103,6 +104,14 @@ export function displayKey(label) {
       'KC_8': '*',
       'KC_9': '(',
       'KC_0': ')',
+      'KC_GRV': '~',
+      'KC_QUOT': '"',
+      'KC_SCLN': ':',
+      'KC_SCLN': ':',
+      'KC_LBRC': '{',
+      'KC_RBRC': '}',
+      'KC_COMM': '<',
+      'KC_DOT': '>',
     };
 
     const regex = new RegExp('S\\((\\w+)\\)', 'gm')
