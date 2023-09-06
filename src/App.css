@@ -23,6 +23,10 @@ td {
   display: flex;
 }
 
+.left-split > .row:nth-child(4) {
+  justify-content:  end;
+}
+
 .column {
   position: relative;
   margin: 5px;
@@ -43,4 +47,14 @@ td {
 
 .column:last-child {
   top: 40px;
+}
+
+.layer {
+  margin-bottom:  80px;
+}
+
+.split-wrap{
+  display: flex;
+  justify-content: space-around;
+  padding-top:  20px;
 }

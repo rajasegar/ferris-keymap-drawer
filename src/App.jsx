@@ -45,7 +45,7 @@ function App() {
 
   const LeftSplit = (props) => {
     return (
-      <div style={{width: "50%", paddingTop: '20px'}}>
+      <div className="left-split">
         {Rows(props.rows)}
       </div>
     )
@@ -53,7 +53,7 @@ function App() {
 
   const RightSplit = (props) => {
     return (
-      <div style={{width: "50%"}}>
+      <div>
         {Rows(props.rows)}
       </div>
     )
@@ -77,13 +77,13 @@ function App() {
     ];
     
     return (
-      <>
+      <div className="layer">
         <h2>{props.title}</h2>
-        <div className="flex">
+        <div className="split-wrap">
           <LeftSplit rows={leftrows}/>
           <RightSplit rows={rightrows}/>
         </div>  
-      </>
+      </div>
     )
   }
 
